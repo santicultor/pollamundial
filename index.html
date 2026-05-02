@@ -9,21 +9,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap');
 :root{
   /* FIFA World Cup 2026 — colores oficiales */
-  --wc-green:  #1a7a3c;
+  
   --wc-blue:   #1b3f8b;
   --wc-red:    #e84b2b;
   --wc-purple: #6b3fa0;
 
   /* Paleta de la app */
   --bg:    #091a0e;
-  --surf:  #0e2415;
-  --surf2: #143020;
+  --surf:  #0f1623;
+  --surf2: #162030;
   --bdr:   #1d4728;
   --acc:   #e84b2b;
-  --col:   #4ade80;
+  --col:   #fcd34d;
   --txt:   #edfaf2;
   --mut:   #5a8c6a;
-  --grn:   #1a7a3c;
+  --grn:   #16a34a;
   --red:   #e84b2b;
   --blu:   #1b3f8b;
   --r:     12px;
@@ -33,28 +33,28 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);min-
 
 /* HEADER */
 .hdr{
-  background:linear-gradient(135deg,#091a0e 0%,#0e2415 35%,#1b3f8b 70%,#1a7a3c 100%);
-  border-bottom:2px solid var(--wc-green);
+  background:linear-gradient(135deg,#080c18 0%,#0f1623 40%,#1b3f8b 100%);
+  border-bottom:2px solid rgba(245,158,11,.4);
   padding:15px 22px;display:flex;align-items:center;justify-content:space-between;
   position:sticky;top:0;z-index:100;
   box-shadow:0 3px 24px rgba(26,122,60,.35);
 }
 .logo{font-family:'Bebas Neue',sans-serif;font-size:1.75rem;letter-spacing:3px;color:#fff}
-.logo span{color:#4ade80}
+.logo span{color:#f59e0b}
 .logo em{color:#ff7a5c;font-style:normal}
 .hdr-r{display:flex;align-items:center;gap:12px}
 .hdr-name{color:rgba(255,255,255,.6);font-size:.8rem}
 .pts-badge{background:rgba(232,75,43,.2);border:1px solid rgba(232,75,43,.5);border-radius:8px;padding:4px 11px;font-family:'Bebas Neue',sans-serif;font-size:1.05rem;color:#ff8a70;letter-spacing:1px;display:none}
 
 .name-bar{margin:16px 16px 0;background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);padding:13px 18px;display:flex;align-items:center;gap:13px}
-.name-lbl{font-family:'Bebas Neue',sans-serif;font-size:.95rem;letter-spacing:1px;color:#4ade80;white-space:nowrap}
+.name-lbl{font-family:'Bebas Neue',sans-serif;font-size:.95rem;letter-spacing:1px;color:#f59e0b;white-space:nowrap}
 .name-inp{flex:1;background:var(--bg);border:1px solid var(--bdr);border-radius:8px;padding:8px 12px;color:white;font-family:'DM Sans',sans-serif;font-size:.92rem;outline:none;transition:border-color .2s}
-.name-inp:focus{border-color:var(--wc-green);box-shadow:0 0 0 3px rgba(26,122,60,.2)}
+.name-inp:focus{border-color:var(--acc);box-shadow:0 0 0 3px rgba(245,158,11,.15)}
 .name-inp::placeholder{color:var(--mut)}
 
 .prog-wrap{margin:10px 16px 0}
 .prog-track{background:var(--surf);border-radius:100px;height:5px;overflow:hidden}
-.prog-fill{height:100%;background:linear-gradient(90deg,var(--wc-blue),var(--wc-green));border-radius:100px;transition:width .4s}
+.prog-fill{height:100%;background:linear-gradient(90deg,#3b82f6,var(--acc));border-radius:100px;transition:width .4s}
 .prog-lbl{text-align:center;font-size:.7rem;color:var(--mut);margin-top:4px}
 
 /* STEP NAV — 9 steps */
@@ -62,7 +62,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);min-
 .step-btn{flex:1;padding:9px 2px;background:transparent;border:none;border-right:1px solid var(--bdr);color:var(--mut);font-family:'DM Sans',sans-serif;font-size:.58rem;font-weight:500;cursor:pointer;transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:2px}
 .step-btn:last-child{border-right:none}
 .step-num{font-family:'Bebas Neue',sans-serif;font-size:1rem;line-height:1}
-.step-btn.active{background:var(--wc-green);color:#fff;font-weight:700}
+.step-btn.active{background:var(--wc-blue);color:#fff;font-weight:700}
 .step-btn.done{background:rgba(27,63,139,.2);color:#7ab3ff}
 
 /* VALIDATION */
@@ -78,8 +78,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);min-
 .sec-sub{color:var(--mut);font-size:.81rem;margin-bottom:15px}
 
 /* COLOMBIA */
-.col-banner{background:rgba(26,122,60,.12);border:1px solid rgba(74,222,128,.25);border-radius:var(--r);padding:9px 14px;margin-bottom:13px;font-size:.82rem;color:#4ade80}
-.col-card{background:var(--surf);border:1px solid var(--bdr);border-left:4px solid var(--wc-green);border-radius:var(--r);padding:15px;margin-bottom:10px;transition:border-color .2s}
+.col-banner{background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);border-radius:var(--r);padding:9px 14px;margin-bottom:13px;font-size:.82rem;color:var(--acc)}
+.col-card{background:var(--surf);border:1px solid var(--bdr);border-left:4px solid var(--acc);border-radius:var(--r);padding:15px;margin-bottom:10px;transition:border-color .2s}
 .col-card.filled{border-color:var(--col);box-shadow:0 0 0 1px rgba(74,222,128,.2)}
 .col-meta{display:flex;justify-content:space-between;margin-bottom:11px;font-size:.69rem;color:var(--mut);text-transform:uppercase;letter-spacing:.7px}
 .col-teams{display:flex;align-items:center;gap:8px}
@@ -113,14 +113,14 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);min-
 .gm-btn:hover{border-color:#2e4a68;color:var(--txt)}
 .gm-btn .gm-pts{font-size:.6rem;opacity:.7;display:block}
 .gm-btn.sel-h{background:#0f2240;border-color:var(--wc-blue);color:#a5c8ff}
-.gm-btn.sel-d{background:#122010;border-color:var(--wc-green);color:#4ade80}
+.gm-btn.sel-d{background:#1a1500;border-color:var(--acc);color:#f59e0b}
 .gm-btn.sel-a{background:#2a0e08;border-color:var(--wc-red);color:#ff9980}
 
 /* STEP 3 — RANKING */
 .groups-rank-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(265px,1fr));gap:13px}
 .rank-card{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);overflow:hidden}
 .rank-card-head{background:var(--wc-blue);padding:8px 13px;font-family:'Bebas Neue',sans-serif;font-size:.95rem;letter-spacing:2px;color:#fff;border-bottom:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:space-between}
-.g-badge{font-size:.6rem;font-family:'DM Sans',sans-serif;font-weight:600;background:rgba(74,222,128,.15);color:#4ade80;padding:2px 7px;border-radius:100px;display:none}
+.g-badge{font-size:.6rem;font-family:'DM Sans',sans-serif;font-weight:600;background:rgba(245,158,11,.15);color:#f59e0b;padding:2px 7px;border-radius:100px;display:none}
 .g-badge.on{display:block}
 .rank-list{padding:5px 9px 9px}
 .rank-item{display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:8px;background:var(--bg);border:1px solid var(--bdr);margin-bottom:5px;transition:border-color .15s,background .15s}
@@ -133,7 +133,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);min-
 .rank-pts{font-size:.67rem;color:var(--mut)}
 .rank-arrows{display:flex;flex-direction:column;gap:2px;flex-shrink:0}
 .arr-btn{width:26px;height:22px;background:var(--surf2);border:1px solid var(--bdr);border-radius:5px;color:var(--mut);font-size:.75rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;line-height:1}
-.arr-btn:hover:not(:disabled){background:#1a3f28;border-color:var(--wc-green);color:#4ade80}
+.arr-btn:hover:not(:disabled){background:#1e3050;border-color:var(--acc);color:#f59e0b}
 .arr-btn:disabled{opacity:.2;cursor:default}
 .rank-hint{font-size:.66rem;color:var(--mut);text-align:center;padding:0 9px 8px}
 
@@ -154,7 +154,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);min-
 .bm-slot{display:flex;align-items:center;gap:6px;padding:7px 9px;border-radius:7px;border:1px solid var(--bdr);background:var(--bg);cursor:pointer;transition:all .17s;min-height:36px}
 .bm-slot:hover:not(.tbd):not(.ko-winner){background:var(--surf2);border-color:#2e4a68}
 .bm-slot.sel{background:#102060;border-color:var(--wc-blue);box-shadow:0 0 0 1px rgba(27,63,139,.4)}
-.bm-slot.ko-winner{background:rgba(16,185,129,.1);border-color:rgba(16,185,129,.4);cursor:default}
+.bm-slot.ko-winner{background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.35);cursor:default}
 .bm-slot.tbd{opacity:.38;cursor:default;pointer-events:none}
 .bm-emoji{font-size:1.1rem;line-height:1;flex-shrink:0}
 .bm-name{font-size:.72rem;font-weight:500;color:var(--txt);line-height:1.2;flex:1}
@@ -193,26 +193,26 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);min-
 
 /* Final step */
 .final-card{background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(245,158,11,.02));border:1px solid rgba(245,158,11,.25);border-radius:var(--r);padding:14px;margin-bottom:12px}
-.final-card-title{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:2px;color:#4ade80;margin-bottom:9px;padding-bottom:6px;border-bottom:1px solid rgba(74,222,128,.2)}
+.final-card-title{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:2px;color:#f59e0b;margin-bottom:9px;padding-bottom:6px;border-bottom:1px solid rgba(74,222,128,.2)}
 
 /* Buttons */
 .btn{padding:10px 20px;border-radius:8px;border:none;font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .2s}
 .btn-p{background:var(--wc-red);color:#fff;font-weight:700}.btn-p:hover{background:#c73d22}
 .btn-s{background:var(--surf2);border:1px solid var(--bdr);color:var(--txt)}.btn-s:hover{background:#1e3050}
-.btn-fin{background:var(--grn);color:#000;display:flex;align-items:center;gap:7px;font-size:.9rem;padding:12px 26px}.btn-fin:hover{background:#059669}
+.btn-fin{background:#16a34a;color:#000;display:flex;align-items:center;gap:7px;font-size:.9rem;padding:12px 26px}.btn-fin:hover{background:#059669}
 .btn-csv{background:#6366f1;color:#fff;display:flex;align-items:center;gap:7px;font-size:.9rem;padding:12px 26px}.btn-csv:hover{background:#4f46e5}
-.btn-review{background:var(--surf2);border:1px solid var(--bdr);color:var(--txt);font-size:.84rem;padding:9px 20px}.btn-review:hover{background:#142a1c;border-color:var(--wc-green);color:#4ade80}
+.btn-review{background:var(--surf2);border:1px solid var(--bdr);color:var(--txt);font-size:.84rem;padding:9px 20px}.btn-review:hover{background:#1a2840;border-color:var(--acc);color:#f59e0b}
 .nav-row{display:flex;justify-content:space-between;margin-top:18px;gap:9px}
 
 /* SUMMARY */
 .finish-card{background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(245,158,11,.03));border:2px solid rgba(245,158,11,.35);border-radius:var(--r);padding:22px 20px;text-align:center;margin-bottom:10px}
-.finish-title{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:2px;color:#4ade80;margin-bottom:4px}
+.finish-title{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:2px;color:#f59e0b;margin-bottom:4px}
 .finish-sub{color:var(--mut);font-size:.82rem;margin-bottom:14px}
 .finish-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:10px}
 .finish-hint{font-size:.7rem;color:var(--mut)}
 .sum-banner{background:rgba(26,122,60,.12);border:1px solid rgba(26,122,60,.4);border-radius:var(--r);padding:15px;text-align:center;margin-bottom:13px}
 .sum-card{background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);padding:13px;margin-bottom:10px}
-.sum-title{font-family:'Bebas Neue',sans-serif;font-size:.95rem;letter-spacing:1px;color:#4ade80;margin-bottom:8px}
+.sum-title{font-family:'Bebas Neue',sans-serif;font-size:.95rem;letter-spacing:1px;color:#f59e0b;margin-bottom:8px}
 .sum-row{display:flex;align-items:center;gap:6px;padding:5px 0;border-bottom:1px solid var(--bdr);font-size:.8rem;flex-wrap:wrap}
 .sum-row:last-child{border-bottom:none}
 .sum-val{margin-left:auto;font-weight:600;font-size:.8rem;display:flex;align-items:center;gap:4px}
@@ -1037,7 +1037,7 @@ function renderSummary(){
   const finLbl=document.getElementById('finish-pts-lbl');
   if(finLbl)finLbl.textContent=pts+' puntos posibles · '+pct;
   let h='';
-  h+=`<div class="sum-banner"><div style="font-size:1.9rem;margin-bottom:3px">📋</div><div style="color:var(--grn);font-weight:600">${S.name||'Participante'}</div><div style="color:var(--mut);font-size:.74rem;margin-top:2px">${pct}</div></div>`;
+  h+=`<div class="sum-banner"><div style="font-size:1.9rem;margin-bottom:3px">📋</div><div style="color:var(--acc);font-weight:600">${S.name||'Participante'}</div><div style="color:var(--mut);font-size:.74rem;margin-top:2px">${pct}</div></div>`;
 
   // Colombia
   h+=`<div class="sum-card"><div class="sum-title">🇨🇴 Colombia</div>`;
@@ -1250,7 +1250,7 @@ function showWelcome(){
   m.innerHTML = `
     <div style="background:#0e2415;border:1px solid #1d4728;border-radius:18px;padding:28px 24px;max-width:420px;width:100%;text-align:center">
       <div style="font-size:3rem;margin-bottom:4px">⚽🏆</div>
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:3px;color:#4ade80;margin-bottom:4px">¡Bienvenido!</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:3px;color:#f59e0b;margin-bottom:4px">¡Bienvenido!</div>
       <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:1px;color:rgba(255,255,255,.8);margin-bottom:16px">Polla Mundial 2026 · Por Nelson Bedoya</div>
       <div style="background:rgba(26,122,60,.15);border:1px solid rgba(74,222,128,.3);border-radius:12px;padding:14px 16px;margin-bottom:18px;text-align:left">
         <p style="font-size:.82rem;color:rgba(255,255,255,.85);line-height:1.7;margin-bottom:10px">
@@ -1264,7 +1264,7 @@ function showWelcome(){
         </p>
       </div>
       <button onclick="document.getElementById('welcome-modal').remove()"
-        style="background:linear-gradient(135deg,#1a7a3c,#1b3f8b);color:#fff;border:none;border-radius:10px;padding:13px 32px;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;width:100%;letter-spacing:.5px">
+        style="background:linear-gradient(135deg,#1b3f8b,#f59e0b);color:#fff;border:none;border-radius:10px;padding:13px 32px;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;width:100%;letter-spacing:.5px">
         ¡Entendido, comenzar! 🚀
       </button>
     </div>`;
