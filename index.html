@@ -6,7 +6,7 @@
 <title>Polla Mundial 2026</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Noto+Color+Emoji&display=swap');
 :root{
   /* FIFA World Cup 2026 — colores oficiales */
   
@@ -84,7 +84,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);min-
 .col-meta{display:flex;justify-content:space-between;margin-bottom:11px;font-size:.69rem;color:var(--mut);text-transform:uppercase;letter-spacing:.7px}
 .col-teams{display:flex;align-items:center;gap:8px}
 .col-team{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;text-align:center}
-.col-emoji{font-size:2.1rem;line-height:1}
+.col-emoji{font-size:2.4rem;line-height:1;font-family:'Noto Color Emoji',sans-serif}
 .col-tname{font-size:.78rem;font-weight:600}
 .score-area{display:flex;align-items:center;flex-direction:column;gap:5px;min-width:86px}
 .vs-lbl{font-family:'Bebas Neue',sans-serif;font-size:.82rem;color:var(--mut);letter-spacing:2px}
@@ -106,7 +106,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);min-
 .gm-teams{display:flex;align-items:center;gap:5px;margin-bottom:4px}
 .gm-team{flex:1;display:flex;align-items:center;gap:4px;font-size:.76rem;font-weight:500}
 .gm-team.right{flex-direction:row-reverse;text-align:right}
-.gm-emoji{font-size:1rem}
+.gm-emoji{font-size:1.1rem;line-height:1;font-family:'Noto Color Emoji',sans-serif}
 .gm-vs{font-size:.62rem;color:var(--mut);font-weight:700}
 .gm-btns{display:flex;gap:4px}
 .gm-btn{flex:1;padding:5px 2px;background:var(--bg);border:1px solid var(--bdr);border-radius:6px;color:var(--mut);font-size:.68rem;cursor:pointer;transition:all .15s;text-align:center}
@@ -128,7 +128,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);min-
 .rank-item.moving{background:#1a1500;border-color:var(--acc)}
 .rank-pos{font-family:'Bebas Neue',sans-serif;font-size:1.05rem;min-width:22px;color:var(--mut)}
 .rank-pos.p1{color:#fbbf24}.rank-pos.p2{color:#a5c8ff}.rank-pos.p3{color:#fb923c}
-.rank-emoji{font-size:1.2rem;line-height:1}
+.rank-emoji{font-size:1.2rem;line-height:1;font-family:'Noto Color Emoji',sans-serif}
 .rank-name{font-size:.8rem;font-weight:500;flex:1}
 .rank-pts{font-size:.67rem;color:var(--mut)}
 .rank-arrows{display:flex;flex-direction:column;gap:2px;flex-shrink:0}
@@ -156,7 +156,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);min-
 .bm-slot.sel{background:#102060;border-color:var(--wc-blue);box-shadow:0 0 0 1px rgba(27,63,139,.4)}
 .bm-slot.ko-winner{background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.35);cursor:default}
 .bm-slot.tbd{opacity:.38;cursor:default;pointer-events:none}
-.bm-emoji{font-size:1.1rem;line-height:1;flex-shrink:0}
+.bm-emoji{font-size:1.2rem;line-height:1;flex-shrink:0;font-family:'Noto Color Emoji',sans-serif}
 .bm-name{font-size:.72rem;font-weight:500;color:var(--txt);line-height:1.2;flex:1}
 .bm-slot.sel .bm-name{color:#93c5fd}
 .bm-slot.ko-winner .bm-name{color:#6ee7b7}
@@ -186,7 +186,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);min-
 .ko-btn:hover:not(.tbd){background:var(--surf2);border-color:#2e4a68}
 .ko-btn.sel{background:#102060;border-color:var(--wc-blue);box-shadow:0 0 0 1px rgba(27,63,139,.4)}
 .ko-btn.tbd{opacity:.38;cursor:default;pointer-events:none}
-.ko-emoji{font-size:1.2rem;line-height:1}
+.ko-emoji{font-size:1.3rem;line-height:1;font-family:'Noto Color Emoji',sans-serif}
 .ko-name{font-size:.78rem;font-weight:500;color:var(--txt);line-height:1.2}
 .ko-btn.sel .ko-name{color:#a5c8ff}
 .ko-sep{font-family:'Bebas Neue',sans-serif;font-size:.85rem;color:var(--mut);align-self:center}
@@ -338,7 +338,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);min-
 <!-- STEP 2: ORDEN DE CLASIFICACIÓN -->
 <div class="sec" id="step-2">
   <div class="sec-title">📊 Orden de Clasificación</div>
-  <div class="sec-sub">Ordena cada grupo: 1º=+25pts · 2º=+20pts · 3ro y 4to sin puntos</div>
+  <div class="sec-sub">Solo el 1º (+25pts) y 2º (+20pts) clasificado suman puntos. El orden del 3ro y 4to no puntúa.</div>
+  <div style="background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2);border-radius:var(--r);padding:10px 14px;margin-bottom:14px;font-size:.81rem;color:#93c5fd">
+    💡 <strong>Ordena los equipos</strong> usando las flechas ▲▼. Si no cambias el orden, se usará el orden original del grupo. Puedes continuar sin hacer cambios.
+  </div>
   <div class="groups-rank-grid" id="rank-container"></div>
   <div class="nav-row">
     <button class="btn btn-s" onclick="goStep(1)">← Atrás</button>
@@ -448,7 +451,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);min-
 // ══════════════════════════════════════
 // DATA — ALL 48 TEAMS CONFIRMED
 // ══════════════════════════════════════
-const E=t=>({
+const FLAGS={
   'México':'🇲🇽','Sudáfrica':'🇿🇦','Corea del Sur':'🇰🇷','Chequia':'🇨🇿',
   'Canadá':'🇨🇦','Suiza':'🇨🇭','Catar':'🇶🇦','Bosnia':'🇧🇦',
   'Brasil':'🇧🇷','Marruecos':'🇲🇦','Haití':'🇭🇹','Escocia':'🏴󠁧󠁢󠁳󠁣󠁴󠁿',
@@ -461,7 +464,8 @@ const E=t=>({
   'Argentina':'🇦🇷','Argelia':'🇩🇿','Austria':'🇦🇹','Jordania':'🇯🇴',
   'Portugal':'🇵🇹','Uzbekistán':'🇺🇿','Colombia':'🇨🇴','R.D. Congo':'🇨🇩',
   'Inglaterra':'🏴󠁧󠁢󠁥󠁮󠁧󠁿','Croacia':'🇭🇷','Ghana':'🇬🇭','Panamá':'🇵🇦',
-}[t]||'❓');
+};
+const E=t=>FLAGS[t]||'🏳️';
 
 // GROUPS — all 48 confirmed
 // Matches in official FIFA schedule order (verified against FIFA/MLS schedule)
@@ -537,9 +541,9 @@ const PHASES={r32:R32,r16:R16,qf:QF,sf:SF};
 
 const PTS={
   COL_EXACT:50, COL_RES:0,       // Colombia: solo marcador exacto — 3×50 = 150
-  RANK:[25,20,10,0],             // Clasificación: 1º/2º/3º/4º — 12×(25+20+10) = 660
+  RANK:[25,20,0,0],              // Clasificación: 1º/2º solo — 12×(25+20) = 540
   MATCH:15,                      // Resultado partido grupo — 72×15 = 1080
-  BEST3:0,                       // Mejores terceros — sin puntos
+  BEST3:15,                      // Mejores terceros — 8×15 = 120 pts
   r32:40,                        // Ronda de 32 — 16×40 = 640
   r16:50,                        // Octavos — 8×50 = 400
   qf:70,                         // Cuartos — 4×70 = 280
@@ -613,7 +617,7 @@ function validateStep(step){
   const m=[];
   if(step===0){for(let i=1;i<=3;i++){if(S.col['m'+i+'h']===''||S.col['m'+i+'a']==='')m.push('Partido '+i+' de Colombia: falta el marcador');}}
   if(step===1){const total=GROUPS.reduce((s,g)=>s+g.matches.length,0);const done=Object.keys(S.grpMatch).length;if(done<total)m.push(`Partidos de grupos: faltan ${total-done} resultados`);}
-  if(step===2){GROUPS.forEach(g=>{if(!S.grpSet[g.name])m.push('Grupo '+g.name+': no has ordenado la clasificación');});}
+  // step 2 ranking is optional — user can continue without reordering
   if(step===3){const done3=Object.keys(S.best3).length;if(done3<8)m.push(`Mejor Tercero: faltan ${8-done3} selecciones (necesitas elegir 8)`);}
   if(step===4){const f=R32.filter((_,i)=>!S.r32[i]);if(f.length)m.push(`Ronda de 32: faltan ${f.length} resultados`);}
   if(step===5){const f=R16.filter((_,i)=>!S.r16[i]);if(f.length)m.push(`Octavos: faltan ${f.length} resultados`);}
@@ -649,7 +653,12 @@ function goStep(n){
   if(n===9){renderSummary();}
   window.scrollTo(0,0);
 }
-function onName(){S.name=document.getElementById('inp-name').value;document.getElementById('hdr-name').textContent=S.name?'👤 '+S.name:'';}
+function onName(){
+  S.name  = document.getElementById('inp-name')?.value.trim()||'';
+  S.email = document.getElementById('inp-email')?.value.trim()||'';
+  S.phone = document.getElementById('inp-phone')?.value.trim()||'';
+  document.getElementById('hdr-name').textContent = S.name ? '👤 '+S.name : '';
+}
 
 // ══════════════════════════════════════
 // COLOMBIA
@@ -744,7 +753,7 @@ function rankItemHTML(grp,team,idx){
     <span class="rank-pos${pc}">${lbl}</span>
     <span class="rank-emoji">${E(team)}</span>
     <span class="rank-name">${team}</span>
-    <span class="rank-pts">+${PTS.RANK[idx]}pts</span>
+    ${PTS.RANK[idx]>0?`<span class="rank-pts">+${PTS.RANK[idx]}pts</span>`:''}
     <div class="rank-arrows">
       <button class="arr-btn" onclick="moveRank('${grp}',${idx},-1)"${upDis} title="Subir">▲</button>
       <button class="arr-btn" onclick="moveRank('${grp}',${idx},1)"${dnDis} title="Bajar">▼</button>
@@ -1009,9 +1018,11 @@ function calcPts(){
   // Grupos — resultado de partido (+15 c/u)
   GROUPS.forEach(g=>{
     g.matches.forEach((_,mi)=>{if(S.grpMatch['G'+g.name+mi])p+=PTS.MATCH;});
-    // Clasificación: 1º=25, 2º=20, 3º=10, 4º=0
+    // Clasificación: 1º=25, 2º=20, 3º=0, 4º=0
     if(S.grpSet[g.name])p+=PTS.RANK.reduce((a,b)=>a+b,0);
   });
+  // Mejores terceros: +15 por cada uno acertado
+  for(let i=0;i<8;i++){if(S.best3[i])p+=PTS.BEST3;}
   // Eliminatorias: R32+40, R16+50, QF+70, SF+80
   ['r32','r16','qf','sf'].forEach(ph=>PHASES[ph].forEach((_,i)=>{if(S[ph][i])p+=PTS[ph];}));
   // Final: elegir ganador implica también subcampeón (el perdedor)
@@ -1088,7 +1099,7 @@ function renderSummary(){
     r.slots.forEach((slot,i)=>{
       const chosen=S[r.ph][i];
       let res='<span style="color:var(--mut)">–</span>';
-      if(chosen){const t=resolveTeam(chosen==='t1'?slot.t1:slot.t2);if(t!=='?')res=`<strong>${E(t)} ${t}</strong><span class="sum-pts">+${PTS[r.ph]}pts</span>`;}
+      if(chosen){const t=resolveTeam(chosen==='t1'?slot.t1:slot.t2);if(t!=='?')res=`<strong style="display:inline-flex;align-items:center;gap:4px">${E(t)} ${t}</strong><span class="sum-pts">+${PTS[r.ph]}pts</span>`;}
       h+=`<div class="sum-row"><span>${slot.label}</span><span class="sum-val">${res}</span></div>`;
     });h+=`</div>`;
   });
@@ -1116,7 +1127,7 @@ function renderSummary(){
         <p>📋 <strong style="color:var(--txt)">Resultado partido grupo</strong></p><p style="color:var(--acc);text-align:right">+${PTS.MATCH} pts c/u (×72 = 1080)</p>
         <p>📊 <strong style="color:var(--txt)">1º clasificado grupo</strong></p><p style="color:var(--acc);text-align:right">+${PTS.RANK[0]} pts c/u (×12 = 300)</p>
         <p>📊 <strong style="color:var(--txt)">2º clasificado grupo</strong></p><p style="color:var(--acc);text-align:right">+${PTS.RANK[1]} pts c/u (×12 = 240)</p>
-        <p>📊 <strong style="color:var(--txt)">3º clasificado grupo</strong></p><p style="color:var(--acc);text-align:right">+${PTS.RANK[2]} pts c/u (×12 = 120)</p>
+        <p>📊 <strong style="color:var(--txt)">3º y 4º clasificado</strong></p><p style="color:var(--acc);text-align:right">Sin puntos</p>
         <p>🥉 <strong style="color:var(--txt)">Mejores terceros</strong></p><p style="color:var(--acc);text-align:right">+${PTS.BEST3} pts c/u (×8 = 120)</p>
         <p>🔥 <strong style="color:var(--txt)">Ronda de 32</strong></p><p style="color:var(--acc);text-align:right">+${PTS.r32} pts c/u (×16 = 640)</p>
         <p>⚔️ <strong style="color:var(--txt)">Octavos de Final</strong></p><p style="color:var(--acc);text-align:right">+${PTS.r16} pts c/u (×8 = 400)</p>
@@ -1199,7 +1210,7 @@ function buildRows(){
   rows.push(bl());
 
   // ── Clasificación de grupos ───────────────────────────────
-  rows.push(sep('CLASIFICACIÓN DE GRUPOS  (1º +'+PTS.RANK[0]+' · 2º +'+PTS.RANK[1]+' · 3º +'+PTS.RANK[2]+' · 4º +0)'));
+  rows.push(sep('CLASIFICACIÓN DE GRUPOS  (1º +'+PTS.RANK[0]+' · 2º +'+PTS.RANK[1]+' · 3º y 4º sin puntos)'));
   GROUPS.forEach(g=>{
     const rk=S.grpRank[g.name];
     rows.push(r('Grupo '+g.name+' — 1º clasificado', rk[0]||'Sin completar'));
