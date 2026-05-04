@@ -46,7 +46,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);min-
 .hdr-name{color:rgba(255,255,255,.6);font-size:.8rem}
 .pts-badge{background:rgba(232,75,43,.2);border:1px solid rgba(232,75,43,.5);border-radius:8px;padding:4px 11px;font-family:'Bebas Neue',sans-serif;font-size:1.05rem;color:#ff8a70;letter-spacing:1px;display:none}
 
-.name-bar{margin:16px 16px 0;background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);padding:13px 18px;display:flex;align-items:center;gap:13px}
+.name-bar{margin:16px 16px 0;background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);padding:13px 18px;display:flex;align-items:flex-start;gap:13px}
 .name-lbl{font-family:'Bebas Neue',sans-serif;font-size:.95rem;letter-spacing:1px;color:#f59e0b;white-space:nowrap}
 .name-inp{flex:1;background:var(--bg);border:1px solid var(--bdr);border-radius:8px;padding:8px 12px;color:white;font-family:'DM Sans',sans-serif;font-size:.92rem;outline:none;transition:border-color .2s}
 .name-inp:focus{border-color:var(--acc);box-shadow:0 0 0 3px rgba(245,158,11,.15)}
@@ -239,8 +239,20 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);min-
   </div>
 </div>
 <div class="name-bar">
-  <div class="name-lbl">👤 Tu nombre</div>
-  <input class="name-inp" id="inp-name" maxlength="60" placeholder="Escribe tu nombre completo..." oninput="onName()">
+  <div style="display:flex;flex-direction:column;gap:8px;width:100%">
+    <div style="display:flex;align-items:center;gap:10px">
+      <div class="name-lbl">👤 Nombre</div>
+      <input class="name-inp" id="inp-name" maxlength="60" placeholder="Nombre completo..." oninput="onName()">
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <div class="name-lbl">✉️ Email</div>
+      <input class="name-inp" id="inp-email" type="email" maxlength="80" placeholder="correo@ejemplo.com" oninput="onName()">
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <div class="name-lbl">📱 Contacto</div>
+      <input class="name-inp" id="inp-phone" type="tel" maxlength="20" placeholder="Número de WhatsApp o teléfono" oninput="onName()">
+    </div>
+  </div>
 </div>
 <div class="prog-wrap">
   <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
@@ -326,7 +338,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);min-
 <!-- STEP 2: ORDEN DE CLASIFICACIÓN -->
 <div class="sec" id="step-2">
   <div class="sec-title">📊 Orden de Clasificación</div>
-  <div class="sec-sub">Ordena cada grupo: 1º=+25pts · 2º=+20pts · 3º=+10pts · 4to=sin puntos</div>
+  <div class="sec-sub">Ordena cada grupo: 1º=+25pts · 2º=+20pts · 3ro y 4to sin puntos</div>
   <div class="groups-rank-grid" id="rank-container"></div>
   <div class="nav-row">
     <button class="btn btn-s" onclick="goStep(1)">← Atrás</button>
@@ -543,7 +555,7 @@ const PTS={
 // STATE
 // ══════════════════════════════════════
 let S={
-  name:'',
+  name:'', email:'', phone:'',
   col:{m1h:'',m1a:'',m2h:'',m2a:'',m3h:'',m3a:''},
   grpRank:{},grpSet:{},grpMatch:{},
   best3:{},   // slot index 0-5 -> team name chosen by user
@@ -781,7 +793,7 @@ function renderBest3(){
   // Info banner
   const info=document.createElement('div');
   info.style.cssText='background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);border-radius:var(--r);padding:10px 14px;margin-bottom:14px;font-size:.8rem;color:var(--col)';
-  info.innerHTML=`🥉 Hay <strong>12 terceros</strong> pero solo <strong>8 avanzan</strong> a la Ronda de 32. Cada llave solo puede recibir el 3ro de ciertos grupos. Elige uno para cada partido.`;
+  info.innerHTML=`🥉 Hay <strong>12 terceros</strong> pero solo <strong>8 avanzan</strong> a la Ronda de 32. Cada llave recibe el 3ro de ciertos grupos. <strong style="color:var(--acc)">+15 pts por cada uno acertado.</strong>`;
   c.appendChild(info);
 
   // Reference panel — all 12 thirds at a glance
@@ -1037,7 +1049,12 @@ function renderSummary(){
   const finLbl=document.getElementById('finish-pts-lbl');
   if(finLbl)finLbl.textContent=pts+' puntos posibles · '+pct;
   let h='';
-  h+=`<div class="sum-banner"><div style="font-size:1.9rem;margin-bottom:3px">📋</div><div style="color:var(--acc);font-weight:600">${S.name||'Participante'}</div><div style="color:var(--mut);font-size:.74rem;margin-top:2px">${pct}</div></div>`;
+  h+=`<div class="sum-banner">
+    <div style="font-size:1.9rem;margin-bottom:3px">📋</div>
+    <div style="color:var(--acc);font-weight:600;font-size:1.05rem">${S.name||'Participante'}</div>
+    <div style="color:var(--mut);font-size:.75rem;margin-top:3px">${S.email?'✉️ '+S.email:''} ${S.phone?'· 📱 '+S.phone:''}</div>
+    <div style="color:var(--mut);font-size:.73rem;margin-top:2px">${pct}</div>
+  </div>`;
 
   // Colombia
   h+=`<div class="sum-card"><div class="sum-title">🇨🇴 Colombia</div>`;
@@ -1100,7 +1117,7 @@ function renderSummary(){
         <p>📊 <strong style="color:var(--txt)">1º clasificado grupo</strong></p><p style="color:var(--acc);text-align:right">+${PTS.RANK[0]} pts c/u (×12 = 300)</p>
         <p>📊 <strong style="color:var(--txt)">2º clasificado grupo</strong></p><p style="color:var(--acc);text-align:right">+${PTS.RANK[1]} pts c/u (×12 = 240)</p>
         <p>📊 <strong style="color:var(--txt)">3º clasificado grupo</strong></p><p style="color:var(--acc);text-align:right">+${PTS.RANK[2]} pts c/u (×12 = 120)</p>
-        <p>🥉 <strong style="color:var(--txt)">Mejores terceros</strong></p><p style="color:var(--acc);text-align:right">Sin puntos</p>
+        <p>🥉 <strong style="color:var(--txt)">Mejores terceros</strong></p><p style="color:var(--acc);text-align:right">+${PTS.BEST3} pts c/u (×8 = 120)</p>
         <p>🔥 <strong style="color:var(--txt)">Ronda de 32</strong></p><p style="color:var(--acc);text-align:right">+${PTS.r32} pts c/u (×16 = 640)</p>
         <p>⚔️ <strong style="color:var(--txt)">Octavos de Final</strong></p><p style="color:var(--acc);text-align:right">+${PTS.r16} pts c/u (×8 = 400)</p>
         <p>🏆 <strong style="color:var(--txt)">Cuartos de Final</strong></p><p style="color:var(--acc);text-align:right">+${PTS.qf} pts c/u (×4 = 280)</p>
@@ -1118,6 +1135,23 @@ function renderSummary(){
 // MODAL & EXPORT
 // ══════════════════════════════════════
 function openModal(fmt){
+  // Validate contact info before allowing export
+  const missingContact=[];
+  if(!S.name.trim()) missingContact.push('nombre');
+  if(!S.email.trim()) missingContact.push('correo electrónico');
+  if(!S.phone.trim()) missingContact.push('número de contacto');
+  if(missingContact.length){
+    const m=document.createElement('div');m.className='modal-bg';m.id='contact-modal';
+    m.innerHTML=`<div class="modal-box">
+      <div style="font-size:2rem;margin-bottom:8px">⚠️</div>
+      <div class="modal-title" style="color:var(--red)">Datos incompletos</div>
+      <div style="color:var(--txt);font-size:.85rem;margin:10px 0">Para finalizar necesitas completar: <strong>${missingContact.join(', ')}</strong></div>
+      <div style="color:var(--mut);font-size:.78rem;margin-bottom:14px">Encuéntralos en la parte superior de la app.</div>
+      <button class="btn btn-p" onclick="document.getElementById('contact-modal').remove();window.scrollTo(0,0)">Ir a completar</button>
+    </div>`;
+    document.body.appendChild(m);
+    return;
+  }
   const name=(S.name.trim()||'Participante').split(' ')[0];
   const pts=calcPts();
   const m=document.createElement('div');m.className='modal-bg';m.id='exp-modal';
