@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Polla Mundial 2026</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init('AGor4sdQkSVAXZ2gM');</script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Noto+Color+Emoji&display=swap');
 :root{
@@ -200,6 +202,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);min-
 .btn-p{background:var(--wc-red);color:#fff;font-weight:700}.btn-p:hover{background:#c73d22}
 .btn-s{background:var(--surf2);border:1px solid var(--bdr);color:var(--txt)}.btn-s:hover{background:#1e3050}
 .btn-fin{background:#16a34a;color:#000;display:flex;align-items:center;gap:7px;font-size:.9rem;padding:12px 26px}.btn-fin:hover{background:#059669}
+.btn-send{background:linear-gradient(135deg,#f59e0b,#d97706);color:#000;display:flex;align-items:center;gap:8px;font-size:1rem;font-weight:700;padding:14px 32px;border-radius:10px;border:none;cursor:pointer;transition:all .2s;box-shadow:0 4px 15px rgba(245,158,11,.3)}.btn-send:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(245,158,11,.4)}.btn-send:disabled{opacity:.6;cursor:not-allowed;transform:none}
 .btn-csv{background:#6366f1;color:#fff;display:flex;align-items:center;gap:7px;font-size:.9rem;padding:12px 26px}.btn-csv:hover{background:#4f46e5}
 .btn-review{background:var(--surf2);border:1px solid var(--bdr);color:var(--txt);font-size:.84rem;padding:9px 20px}.btn-review:hover{background:#1a2840;border-color:var(--acc);color:#f59e0b}
 .nav-row{display:flex;justify-content:space-between;margin-top:18px;gap:9px}
@@ -340,7 +343,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);min-
   <div class="sec-title">📊 Orden de Clasificación</div>
   <div class="sec-sub">Solo el 1º (+25pts) y 2º (+20pts) clasificado suman puntos. El orden del 3ro y 4to no puntúa.</div>
   <div style="background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2);border-radius:var(--r);padding:10px 14px;margin-bottom:14px;font-size:.81rem;color:#93c5fd">
-    💡 <strong>Ordena los equipos</strong> usando las flechas ▲▼. Si no cambias el orden, se usará el orden original del grupo. Puedes continuar sin hacer cambios.
+    💡 <strong>Ordena los equipos</strong> usando las flechas ▲▼. <strong style="color:#fca5a5">El orden NO se ajusta automáticamente con los resultados que pusiste antes</strong> — debes ordenarlo manualmente según lo que crees que pasará en cada grupo.
   </div>
   <div class="groups-rank-grid" id="rank-container"></div>
   <div class="nav-row">
@@ -435,10 +438,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);min-
     <div class="finish-title">¡Polla completada!</div>
     <div class="finish-sub" id="finish-pts-lbl">Calculando...</div>
     <div class="finish-btns">
-      <button class="btn btn-fin" onclick="openModal('xlsx')">📥 Guardar Excel</button>
-      <button class="btn btn-csv" onclick="openModal('csv')">📄 Guardar CSV</button>
+      <button class="btn-send" id="btn-send-main" onclick="sendPolla()">📤 Enviar Polla</button>
     </div>
-    <div class="finish-hint">Entrega este archivo al organizador de la polla</div>
+    <div style="display:flex;gap:10px;justify-content:center;margin-bottom:10px;flex-wrap:wrap">
+      <button class="btn btn-fin" onclick="openModal('xlsx')">📥 Descargar Excel</button>
+      <button class="btn btn-csv" onclick="openModal('csv')">📄 Descargar CSV</button>
+    </div>
+    <div class="finish-hint">Al enviar, tus pronósticos llegan automáticamente al organizador</div>
   </div>
   <div style="text-align:center;margin-bottom:18px">
     <button class="btn btn-review" onclick="document.getElementById('sum-c').scrollIntoView({behavior:'smooth'})">🔍 Revisar mis pronósticos ↓</button>
@@ -473,7 +479,7 @@ const GROUPS=[
   {name:'A',teams:['México','Sudáfrica','Corea del Sur','Chequia'],
    matches:[['México','Sudáfrica'],['Corea del Sur','Chequia'],['Corea del Sur','México'],['Sudáfrica','Chequia'],['Chequia','México'],['Sudáfrica','Corea del Sur']]},
   {name:'B',teams:['Canadá','Bosnia','Catar','Suiza'],
-   matches:[['Canadá','Bosnia'],['Catar','Suiza'],['Suiza','Bosnia'],['Canadá','Catar'],['Bosnia','Canadá'],['Suiza','Catar']]},
+   matches:[['Canadá','Bosnia'],['Catar','Suiza'],['Canadá','Catar'],['Suiza','Bosnia'],['Bosnia','Catar'],['Suiza','Canadá']]},
   {name:'C',teams:['Brasil','Marruecos','Haití','Escocia'],
    matches:[['Brasil','Marruecos'],['Haití','Escocia'],['Brasil','Haití'],['Marruecos','Escocia'],['Brasil','Escocia'],['Marruecos','Haití']]},
   {name:'D',teams:['Estados Unidos','Paraguay','Australia','Turquía'],
@@ -528,14 +534,14 @@ const R16=[
   {label:'P96',desc:'Gan.P85 vs Gan.P87',t1:'r32:12',t2:'r32:14'},
 ];
 const QF=[
-  {label:'CuartoA',desc:'Gan.P89 vs Gan.P92',t1:'r16:0',t2:'r16:3'},
-  {label:'CuartoB',desc:'Gan.P90 vs Gan.P91',t1:'r16:1',t2:'r16:2'},
-  {label:'CuartoC',desc:'Gan.P93 vs Gan.P96',t1:'r16:4',t2:'r16:7'},
-  {label:'CuartoD',desc:'Gan.P94 vs Gan.P95',t1:'r16:5',t2:'r16:6'},
+  {label:'P97',desc:'Gan.P89 vs Gan.P90',t1:'r16:0',t2:'r16:1'},
+  {label:'P98',desc:'Gan.P93 vs Gan.P94',t1:'r16:4',t2:'r16:5'},
+  {label:'P99',desc:'Gan.P91 vs Gan.P92',t1:'r16:2',t2:'r16:3'},
+  {label:'P100',desc:'Gan.P95 vs Gan.P96',t1:'r16:6',t2:'r16:7'},
 ];
 const SF=[
-  {label:'Semi1',desc:'Gan.CuartoA vs Gan.CuartoB',t1:'qf:0',t2:'qf:1'},
-  {label:'Semi2',desc:'Gan.CuartoC vs Gan.CuartoD',t1:'qf:2',t2:'qf:3'},
+  {label:'Semi1',desc:'Gan.P97 vs Gan.P98',t1:'qf:0',t2:'qf:1'},
+  {label:'Semi2',desc:'Gan.P99 vs Gan.P100',t1:'qf:2',t2:'qf:3'},
 ];
 const PHASES={r32:R32,r16:R16,qf:QF,sf:SF};
 
@@ -566,7 +572,7 @@ let S={
   r32:{},r16:{},qf:{},sf:{},
   final:'',third:''
 };
-GROUPS.forEach(g=>{S.grpRank[g.name]=[...g.teams];S.grpSet[g.name]=false;});
+GROUPS.forEach(g=>{S.grpRank[g.name]=[...g.teams];S.grpSet[g.name]=true;}); // default order counts
 
 // ══════════════════════════════════════
 // RESOLVE
@@ -1088,9 +1094,9 @@ function renderSummary(){
   GROUPS.forEach(g=>{g.matches.forEach((m,mi)=>{
     const res=S.grpMatch['G'+g.name+mi];
     let r='<span style="color:var(--mut)">–</span>';
-    if(res==='home')r=`<strong>${E(m[0])} Gana ${m[0]}</strong>`;
+    if(res==='home')r=`<strong>${E(m[0])} ${m[0]}</strong>`;
     else if(res==='draw')r='<strong>🤝 Empate</strong>';
-    else if(res==='away')r=`<strong>${E(m[1])} Gana ${m[1]}</strong>`;
+    else if(res==='away')r=`<strong>${E(m[1])} ${m[1]}</strong>`;
     h+=`<div class="sum-row"><span style="font-size:.72rem">G${g.name}: ${m[0]} vs ${m[1]}</span><span class="sum-val">${r}${res?`<span class="sum-pts">+${PTS.MATCH}pts</span>`:''}</span></div>`;
   });});h+=`</div>`;
 
@@ -1145,24 +1151,183 @@ function renderSummary(){
 // ══════════════════════════════════════
 // MODAL & EXPORT
 // ══════════════════════════════════════
+function buildPredictionsText(){
+  // Returns ONLY values, one per line, in the exact column order of the master Excel template.
+  // No labels — ready to paste directly into a single column.
+  const v=[];
+  const sf1w=readW('sf',0), sf2w=readW('sf',1);
+  const sf1l=readL('sf',0), sf2l=readL('sf',1);
+  const champ  = S.final?(S.final==='t1'?sf1w:sf2w):'Sin completar';
+  const ruChamp= S.final?(S.final==='t1'?sf2w:sf1w):'Sin completar';
+  const p3rd   = S.third?(S.third==='t1'?sf1l:sf2l):'Sin completar';
+  const p4th   = S.third?(S.third==='t1'?sf2l:sf1l):'Sin completar';
+
+  const SEP = '----------';
+
+  // Header
+  v.push(SEP);
+  v.push('POLLA MUNDIAL 2026 — '+S.name.toUpperCase());
+  v.push(new Date().toLocaleString('es-CO'));
+  v.push(calcPts()+' pts');
+
+  // Colombia
+  v.push(SEP);
+  v.push(S.col.m1h!==''&&S.col.m1a!==''? S.col.m1h+' – '+S.col.m1a : 'Sin completar');
+  v.push(S.col.m2h!==''&&S.col.m2a!==''? S.col.m2h+' – '+S.col.m2a : 'Sin completar');
+  v.push(S.col.m3h!==''&&S.col.m3a!==''? S.col.m3h+' – '+S.col.m3a : 'Sin completar');
+
+  // Group rankings — 4 values per group × 12 groups = 48 values
+  v.push(SEP);
+  GROUPS.forEach(g=>{
+    const r=S.grpRank[g.name];
+    v.push(r[0]||'Sin completar');
+    v.push(r[1]||'Sin completar');
+    v.push(r[2]||'Sin completar');
+    v.push(r[3]||'Sin completar');
+  });
+
+  // Group match results — 6 per group × 12 = 72 values
+  v.push(SEP);
+  GROUPS.forEach(g=>{
+    g.matches.forEach((m,mi)=>{
+      const res=S.grpMatch['G'+g.name+mi];
+      if(res==='home')      v.push(m[0]);
+      else if(res==='draw') v.push('Empate');
+      else if(res==='away') v.push(m[1]);
+      else                  v.push('Sin completar');
+    });
+  });
+
+  // Best 3rd — 8 values
+  v.push(SEP);
+  BEST3_SLOTS.forEach(({slotIdx})=>{
+    v.push(S.best3[slotIdx]||'Sin completar');
+  });
+
+  // R32 — 16 values
+  v.push(SEP);
+  R32.forEach((slot,i)=>{
+    const chosen=S.r32[i];
+    v.push(chosen?resolveTeam(chosen==='t1'?slot.t1:slot.t2):'Sin completar');
+  });
+
+  // R16 — 8 values
+  v.push(SEP);
+  R16.forEach((slot,i)=>{
+    const chosen=S.r16[i];
+    v.push(chosen?resolveTeam(chosen==='t1'?slot.t1:slot.t2):'Sin completar');
+  });
+
+  // QF — 4 values
+  v.push(SEP);
+  QF.forEach((slot,i)=>{
+    const chosen=S.qf[i];
+    v.push(chosen?resolveTeam(chosen==='t1'?slot.t1:slot.t2):'Sin completar');
+  });
+
+  // SF — 2 values
+  v.push(SEP);
+  SF.forEach((slot,i)=>{
+    const chosen=S.sf[i];
+    v.push(chosen?resolveTeam(chosen==='t1'?slot.t1:slot.t2):'Sin completar');
+  });
+
+  // Final — 4 values
+  v.push(SEP);
+  v.push(champ);
+  v.push(ruChamp);
+  v.push(p3rd);
+  v.push(p4th);
+
+  return v.join('\n');
+}
+
+function sendPolla(){
+  // Validate contact info first
+  const missingContact=[];
+  if(!S.name.trim()) missingContact.push('nombre');
+  if(!S.email.trim()) missingContact.push('correo electrónico');
+  if(!S.phone.trim()) missingContact.push('número de contacto');
+  if(missingContact.length){
+    showContactError(missingContact);
+    return;
+  }
+
+  const btn = document.getElementById('btn-send-main');
+  btn.disabled = true;
+  btn.innerHTML = '⏳ Enviando...';
+
+  const params = {
+    participant_name:  S.name,
+    participant_email: S.email,
+    participant_phone: S.phone,
+    total_pts:         calcPts() + ' pts posibles',
+    predictions:       buildPredictionsText(),
+  };
+
+  emailjs.send('service_1l0l47s', 'template_abc123', params)
+    .then(()=>{
+      btn.innerHTML = '✅ ¡Enviado!';
+      btn.style.background = 'linear-gradient(135deg,#10b981,#059669)';
+      // Show success modal
+      const m=document.createElement('div');
+      m.className='modal-bg';
+      m.innerHTML=`<div class="modal-box" style="text-align:center">
+        <div style="font-size:3rem;margin-bottom:10px">🏆</div>
+        <div class="modal-title" style="color:#10b981">¡Polla enviada!</div>
+        <div style="color:var(--txt);font-size:.85rem;margin:12px 0;line-height:1.6">
+          Tus pronósticos fueron enviados exitosamente.<br>
+          <strong style="color:var(--acc)">${S.name}</strong>, ¡buena suerte en el Mundial!
+        </div>
+        <div style="color:var(--mut);font-size:.78rem;margin-bottom:16px">¿Quieres guardar también una copia?</div>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+          <button class="btn btn-fin" onclick="this.closest('.modal-bg').remove();doXLSX()">📥 Descargar Excel</button>
+          <button class="btn btn-s" onclick="this.closest('.modal-bg').remove()">Cerrar</button>
+        </div>
+      </div>`;
+      document.body.appendChild(m);
+    })
+    .catch((err)=>{
+      btn.disabled = false;
+      btn.innerHTML = '📤 Enviar Polla';
+      btn.style.background = '';
+      const m=document.createElement('div');
+      m.className='modal-bg';
+      m.innerHTML=`<div class="modal-box" style="text-align:center">
+        <div style="font-size:2.5rem;margin-bottom:10px">⚠️</div>
+        <div class="modal-title" style="color:var(--red)">Error al enviar</div>
+        <div style="color:var(--txt);font-size:.84rem;margin:10px 0 16px">
+          No se pudo enviar. Por favor descarga el Excel y envíalo manualmente.
+        </div>
+        <div style="display:flex;gap:10px;justify-content:center">
+          <button class="btn btn-fin" onclick="this.closest('.modal-bg').remove();doXLSX()">📥 Descargar Excel</button>
+          <button class="btn btn-s" onclick="this.closest('.modal-bg').remove()">Cerrar</button>
+        </div>
+      </div>`;
+      document.body.appendChild(m);
+      console.error('EmailJS error:', err);
+    });
+}
+
+function showContactError(missing){
+  const m=document.createElement('div');m.className='modal-bg';m.id='contact-modal';
+  m.innerHTML=`<div class="modal-box">
+    <div style="font-size:2rem;margin-bottom:8px">⚠️</div>
+    <div class="modal-title" style="color:var(--red)">Datos incompletos</div>
+    <div style="color:var(--txt);font-size:.85rem;margin:10px 0">Falta completar: <strong>${missing.join(', ')}</strong></div>
+    <div style="color:var(--mut);font-size:.78rem;margin-bottom:14px">Están en la parte superior de la app.</div>
+    <button class="btn btn-p" onclick="this.closest('.modal-bg').remove();window.scrollTo(0,0)">Ir a completar</button>
+  </div>`;
+  document.body.appendChild(m);
+}
+
 function openModal(fmt){
   // Validate contact info before allowing export
   const missingContact=[];
   if(!S.name.trim()) missingContact.push('nombre');
   if(!S.email.trim()) missingContact.push('correo electrónico');
   if(!S.phone.trim()) missingContact.push('número de contacto');
-  if(missingContact.length){
-    const m=document.createElement('div');m.className='modal-bg';m.id='contact-modal';
-    m.innerHTML=`<div class="modal-box">
-      <div style="font-size:2rem;margin-bottom:8px">⚠️</div>
-      <div class="modal-title" style="color:var(--red)">Datos incompletos</div>
-      <div style="color:var(--txt);font-size:.85rem;margin:10px 0">Para finalizar necesitas completar: <strong>${missingContact.join(', ')}</strong></div>
-      <div style="color:var(--mut);font-size:.78rem;margin-bottom:14px">Encuéntralos en la parte superior de la app.</div>
-      <button class="btn btn-p" onclick="document.getElementById('contact-modal').remove();window.scrollTo(0,0)">Ir a completar</button>
-    </div>`;
-    document.body.appendChild(m);
-    return;
-  }
+  if(missingContact.length){ showContactError(missingContact); return; }
   const name=(S.name.trim()||'Participante').split(' ')[0];
   const pts=calcPts();
   const m=document.createElement('div');m.className='modal-bg';m.id='exp-modal';
@@ -1226,9 +1391,9 @@ function buildRows(){
     g.matches.forEach((m,mi)=>{
       const res=S.grpMatch['G'+g.name+mi];
       let answer='Sin completar';
-      if(res==='home') answer='Gana '+m[0];
+      if(res==='home') answer=m[0];
       else if(res==='draw') answer='Empate';
-      else if(res==='away') answer='Gana '+m[1];
+      else if(res==='away') answer=m[1];
       rows.push(r('G'+g.name+': '+m[0]+' vs '+m[1], answer));
     });
   });
