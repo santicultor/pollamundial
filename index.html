@@ -264,16 +264,17 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);min-
 
 <!-- 10 steps -->
 <div class="step-nav">
-  <button class="step-btn active" onclick="goStep(0)"><span class="step-num">1</span>Colombia</button>
-  <button class="step-btn" onclick="goStep(1)"><span class="step-num">2</span>Partidos</button>
-  <button class="step-btn" onclick="goStep(2)"><span class="step-num">3</span>Orden</button>
-  <button class="step-btn" onclick="goStep(3)"><span class="step-num">4</span>Mejor 3º</button>
-  <button class="step-btn" onclick="goStep(4)"><span class="step-num">5</span>Ronda 32</button>
-  <button class="step-btn" onclick="goStep(5)"><span class="step-num">6</span>Octavos</button>
-  <button class="step-btn" onclick="goStep(6)"><span class="step-num">7</span>Cuartos</button>
-  <button class="step-btn" onclick="goStep(7)"><span class="step-num">8</span>Semis</button>
-  <button class="step-btn" onclick="goStep(8)"><span class="step-num">9</span>Final</button>
-  <button class="step-btn" onclick="goStep(9)"><span class="step-num">10</span>Resumen</button>
+  <button class="step-btn active" onclick="goStep(0)"><span class="step-num">·</span>Inicio</button>
+  <button class="step-btn" onclick="goStep(1)"><span class="step-num">1</span>Colombia</button>
+  <button class="step-btn" onclick="goStep(2)"><span class="step-num">2</span>Partidos</button>
+  <button class="step-btn" onclick="goStep(3)"><span class="step-num">3</span>Orden</button>
+  <button class="step-btn" onclick="goStep(4)"><span class="step-num">4</span>Mejor 3º</button>
+  <button class="step-btn" onclick="goStep(5)"><span class="step-num">5</span>Ronda 32</button>
+  <button class="step-btn" onclick="goStep(6)"><span class="step-num">6</span>Octavos</button>
+  <button class="step-btn" onclick="goStep(7)"><span class="step-num">7</span>Cuartos</button>
+  <button class="step-btn" onclick="goStep(8)"><span class="step-num">8</span>Semis</button>
+  <button class="step-btn" onclick="goStep(9)"><span class="step-num">9</span>Final</button>
+  <button class="step-btn" onclick="goStep(10)"><span class="step-num">10</span>Resumen</button>
 </div>
 <div class="val-banner" id="val-banner">
   <div class="val-title">⚠️ Completa estos pronósticos antes de avanzar</div>
@@ -281,9 +282,62 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);min-
 </div>
 
 <!-- STEP 0: COLOMBIA -->
+<!-- STEP 0: BIENVENIDA -->
 <div class="sec active" id="step-0">
+  <div style="text-align:center;padding:8px 0 18px">
+    <div style="font-size:3.5rem;margin-bottom:6px">⚽🏆</div>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:3px;color:var(--acc)">Polla Mundial 2026</div>
+    <div style="color:var(--mut);font-size:.85rem;margin-top:4px">Organizado por Santiago Bedoya · DBEE UniSabana</div>
+  </div>
+
+  <!-- Instrucciones -->
+  <div style="background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);padding:16px 18px;margin-bottom:12px">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:1.5px;color:var(--acc);margin-bottom:10px">📋 ¿Cómo funciona?</div>
+    <div style="font-size:.83rem;color:var(--txt);line-height:1.9">
+      <p style="margin-bottom:8px">Completa los <strong>9 pasos</strong> con tus pronósticos del Mundial 2026:</p>
+      <div style="display:flex;flex-direction:column;gap:5px">
+        <div style="display:flex;gap:8px;align-items:flex-start"><span style="color:var(--acc);font-weight:700;min-width:18px">1.</span><span>Escribe tu <strong>nombre, correo y número de contacto</strong> en la barra de arriba.</span></div>
+        <div style="display:flex;gap:8px;align-items:flex-start"><span style="color:var(--acc);font-weight:700;min-width:18px">2.</span><span>Completa los <strong>9 pasos</strong> de pronósticos: Colombia, partidos de grupo, clasificación, mejores terceros y todas las rondas eliminatorias hasta la final.</span></div>
+        <div style="display:flex;gap:8px;align-items:flex-start"><span style="color:var(--acc);font-weight:700;min-width:18px">3.</span><span>En el <strong>Resumen final</strong>, presiona <strong style="color:var(--acc)">📤 Enviar Polla</strong> y tus predicciones llegarán automáticamente al organizador por correo.</span></div>
+        <div style="display:flex;gap:8px;align-items:flex-start"><span style="color:var(--acc);font-weight:700;min-width:18px">4.</span><span>Opcional: descarga una copia en <strong>Excel o CSV</strong> para tus registros personales.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Puntaje -->
+  <div style="background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);padding:16px 18px;margin-bottom:12px">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:1.5px;color:var(--acc);margin-bottom:10px">🏅 Sistema de Puntos — Total: 4.000 pts</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 12px;font-size:.78rem;line-height:1.9">
+      <span style="color:var(--mut)">⚽ Marcador exacto Colombia</span><span style="color:var(--acc);text-align:right"><strong>+60 pts</strong> c/u (×3)</span>
+      <span style="color:var(--mut)">📋 Resultado partido grupos</span><span style="color:var(--acc);text-align:right"><strong>+15 pts</strong> c/u (×72)</span>
+      <span style="color:var(--mut)">📊 1º y 2º clasificado grupo</span><span style="color:var(--acc);text-align:right"><strong>+20 pts</strong> c/u (×24)</span>
+      <span style="color:var(--mut)">🥉 Mejores terceros</span><span style="color:var(--acc);text-align:right"><strong>+15 pts</strong> c/u (×8)</span>
+      <span style="color:var(--mut)">🔥 Ronda de 32</span><span style="color:var(--acc);text-align:right"><strong>+40 pts</strong> c/u (×16)</span>
+      <span style="color:var(--mut)">⚔️ Octavos de Final</span><span style="color:var(--acc);text-align:right"><strong>+50 pts</strong> c/u (×8)</span>
+      <span style="color:var(--mut)">🏆 Cuartos de Final</span><span style="color:var(--acc);text-align:right"><strong>+70 pts</strong> c/u (×4)</span>
+      <span style="color:var(--mut)">🌟 Semifinalistas</span><span style="color:var(--acc);text-align:right"><strong>+80 pts</strong> c/u (×2)</span>
+      <span style="color:var(--mut)">4️⃣ 4to Puesto</span><span style="color:var(--acc);text-align:right"><strong>+80 pts</strong></span>
+      <span style="color:var(--mut)">🥉 3er Puesto</span><span style="color:var(--acc);text-align:right"><strong>+130 pts</strong></span>
+      <span style="color:var(--mut)">🥈 Subcampeón</span><span style="color:var(--acc);text-align:right"><strong>+190 pts</strong></span>
+      <span style="color:var(--mut)">🥇 Campeón Mundial</span><span style="color:var(--acc);text-align:right"><strong>+260 pts</strong></span>
+    </div>
+  </div>
+
+  <!-- Datos -->
+  <div style="background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);border-radius:var(--r);padding:14px 18px;margin-bottom:18px;font-size:.82rem;color:var(--col)">
+    📝 <strong>Antes de comenzar:</strong> escribe tu <strong>nombre</strong>, <strong>correo</strong> y <strong>número de contacto</strong> en los campos de arriba — son obligatorios para enviar tu polla al organizador.
+  </div>
+
+  <div style="text-align:center">
+    <button class="btn-send" onclick="goStep(1)" style="font-size:1.05rem;padding:15px 40px">
+      ¡Comenzar! →
+    </button>
+  </div>
+</div>
+
+<div class="sec" id="step-1">
   <div class="sec-title">🇨🇴 Partidos de Colombia</div>
-  <div class="sec-sub">Predice el marcador exacto de los 3 partidos de Colombia · +60 pts por marcador exacto</div>
+  <div class="sec-sub">Predice el marcador exacto de los 3 partidos de Colombia en el Grupo K · +60 pts por acierto</div>
   <div class="col-banner">🏆 <strong>Grupo K:</strong> Colombia · Portugal · Uzbekistán · R.D. Congo</div>
   <div class="col-card" id="cc1">
     <div class="col-meta"><span>Grupo K · Partido 1</span><span>17 Jun · Ciudad de México · 22:00 ET</span></div>
@@ -324,115 +378,115 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);min-
     </div>
     <div class="col-pts-hint">Marcador exacto: <span>+60 pts</span> · (solo vale el marcador exacto)</div>
   </div>
-  <div class="nav-row"><div></div><button class="btn btn-p" onclick="tryNext(0,1)">Continuar → Partidos de Grupos</button></div>
+  <div class="nav-row"><div></div><button class="btn btn-p" onclick="tryNext(1,2)">Continuar → Partidos de Grupos</button></div>
 </div>
 
 <!-- STEP 1: PARTIDOS DE GRUPOS -->
-<div class="sec" id="step-1">
+<div class="sec" id="step-2">
   <div class="sec-title">📋 Partidos de Grupos</div>
-  <div class="sec-sub">Predice el resultado de cada partido del grupo: ¿quién gana o habrá empate? (+15 pts c/u)</div>
+  <div class="sec-sub">Predice el resultado de cada partido: ¿quién gana o habrá empate? · +15 pts por acierto</div>
   <div class="groups-matches-grid" id="gm-container"></div>
   <div class="nav-row">
     <button class="btn btn-s" onclick="goStep(0)">← Atrás</button>
-    <button class="btn btn-p" onclick="tryNext(1,2)">Continuar → Orden de Clasificación</button>
+    <button class="btn btn-p" onclick="tryNext(2,3)">Continuar → Orden de Clasificación</button>
   </div>
 </div>
 
 <!-- STEP 2: ORDEN DE CLASIFICACIÓN -->
-<div class="sec" id="step-2">
+<div class="sec" id="step-3">
   <div class="sec-title">📊 Orden de Clasificación</div>
   <div class="sec-sub">Solo el 1º (+20pts) y 2º (+20pts) clasificado suman puntos. El orden del 3ro y 4to no puntúa.</div>
   <div style="background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2);border-radius:var(--r);padding:10px 14px;margin-bottom:14px;font-size:.81rem;color:#93c5fd">
-    💡 <strong>Ordena los equipos</strong> usando las flechas ▲▼. <strong style="color:#fca5a5">El orden NO se ajusta automáticamente con los resultados que pusiste antes</strong> — debes ordenarlo manualmente según lo que crees que pasará en cada grupo.
+    💡 <strong>Ordena los equipos</strong> usando las flechas ▲▼. <strong style="color:#fca5a5">El orden NO se ajusta automáticamente</strong> — ordénalo según tu predicción. 1º y 2º clasificado suman +20 pts c/u.
   </div>
   <div class="groups-rank-grid" id="rank-container"></div>
   <div class="nav-row">
     <button class="btn btn-s" onclick="goStep(1)">← Atrás</button>
-    <button class="btn btn-p" onclick="tryNext(2,3)">Continuar → Mejores Terceros</button>
+    <button class="btn btn-p" onclick="tryNext(3,4)">Continuar → Mejores Terceros</button>
   </div>
 </div>
 
 <!-- STEP 3: MEJORES TERCEROS -->
-<div class="sec" id="step-3">
+<div class="sec" id="step-4">
   <div class="sec-title">🥉 Mejores Terceros</div>
-  <div class="sec-sub">8 de los 12 terceros clasificados avanzan a la Ronda de 32. ¿Cuáles crees que serán? (sin puntos, pero necesario para armar el bracket)</div>
+  <div class="sec-sub">8 de los 12 terceros clasificados avanzan a la Ronda de 32. Elige uno por llave · +15 pts por cada acierto</div>
   <div id="best3-container"></div>
   <div class="nav-row">
     <button class="btn btn-s" onclick="goStep(2)">← Atrás</button>
-    <button class="btn btn-p" onclick="tryNext(3,4)">Continuar → Ronda de 32</button>
+    <button class="btn btn-p" onclick="tryNext(4,5)">Continuar → Ronda de 32</button>
   </div>
 </div>
 
 <!-- STEP 4: RONDA 32 -->
-<div class="sec" id="step-4">
+<div class="sec" id="step-5">
   <div class="sec-title">🔥 Ronda de 32</div>
   <div class="sec-sub">Selecciona quién avanza en cada llave (+40 pts c/u)</div>
   <div class="bracket-wrap" id="r32-bracket"></div>
   <div class="ko-list-fallback" id="r32-list"></div>
   <div class="nav-row">
     <button class="btn btn-s" onclick="goStep(3)">← Atrás</button>
-    <button class="btn btn-p" onclick="tryNext(4,5)">Continuar → Octavos de Final</button>
+    <button class="btn btn-p" onclick="tryNext(5,6)">Continuar → Octavos de Final</button>
   </div>
 </div>
 
 <!-- STEP 4: OCTAVOS -->
-<div class="sec" id="step-5">
+<div class="sec" id="step-6">
   <div class="sec-title">⚔️ Octavos de Final</div>
   <div class="sec-sub">Selecciona el ganador de cada llave (+50 pts c/u)</div>
   <div class="bracket-wrap" id="r16-bracket"></div>
   <div class="ko-list-fallback" id="r16-list"></div>
   <div class="nav-row">
     <button class="btn btn-s" onclick="goStep(4)">← Atrás</button>
-    <button class="btn btn-p" onclick="tryNext(5,6)">Continuar → Cuartos de Final</button>
+    <button class="btn btn-p" onclick="tryNext(6,7)">Continuar → Cuartos de Final</button>
   </div>
 </div>
 
 <!-- STEP 5: CUARTOS -->
-<div class="sec" id="step-6">
+<div class="sec" id="step-7">
   <div class="sec-title">🏆 Cuartos de Final</div>
   <div class="sec-sub">Selecciona el ganador de cada llave (+70 pts c/u)</div>
   <div class="bracket-wrap" id="qf-bracket"></div>
   <div class="ko-list-fallback" id="qf-list"></div>
   <div class="nav-row">
     <button class="btn btn-s" onclick="goStep(5)">← Atrás</button>
-    <button class="btn btn-p" onclick="tryNext(6,7)">Continuar → Semifinales</button>
+    <button class="btn btn-p" onclick="tryNext(7,8)">Continuar → Semifinales</button>
   </div>
 </div>
 
 <!-- STEP 6: SEMIS -->
-<div class="sec" id="step-7">
+<div class="sec" id="step-8">
   <div class="sec-title">🌟 Semifinales</div>
   <div class="sec-sub">Selecciona quién llega a la Final (+80 pts c/u)</div>
   <div class="bracket-wrap" id="sf-bracket"></div>
   <div class="ko-list-fallback" id="sf-list"></div>
   <div class="nav-row">
     <button class="btn btn-s" onclick="goStep(6)">← Atrás</button>
-    <button class="btn btn-p" onclick="tryNext(7,8)">Continuar → Gran Final</button>
+    <button class="btn btn-p" onclick="tryNext(8,9)">Continuar → Gran Final</button>
   </div>
 </div>
 
 <!-- STEP 7: FINAL -->
-<div class="sec" id="step-8">
+<div class="sec" id="step-9">
   <div class="sec-title">🏆 Gran Final &amp; 3er Puesto</div>
-  <div class="sec-sub">El último paso — elige al Campeón (+260pts), Subcampeón (+190pts), 3er Puesto (+130pts) y 4to Puesto (+80pts)</div>
+  <div class="sec-sub">¡Último paso! · 🥇 Campeón +260 · 🥈 Subcampeón +190 · 🥉 3er Puesto +130 · 4️⃣ 4to Puesto +80</div>
   <div class="final-card">
     <div class="final-card-title">🏆 Gran Final · 19 Jul · East Rutherford, NJ · Campeón +260 · Subcampeón +190</div>
     <div class="ko-teams" id="final-slots"></div>
   </div>
   <div class="final-card" style="border-color:rgba(180,83,9,.3);background:linear-gradient(135deg,rgba(180,83,9,.08),rgba(180,83,9,.02))">
-    <div class="final-card-title" style="color:#b45309;border-color:rgba(180,83,9,.2)">🥉 Tercer Puesto · Ganador +120 pts · Perdedor +80 pts</div>
+    <div class="final-card-title" style="color:#b45309;border-color:rgba(180,83,9,.2)">🥉 Tercer Puesto · Ganador +130 pts · Perdedor +80 pts</div>
     <div class="ko-teams" id="third-slots"></div>
   </div>
   <div class="nav-row">
     <button class="btn btn-s" onclick="goStep(7)">← Atrás</button>
-    <button class="btn btn-p" onclick="tryNext(8,9)">Ver Resumen →</button>
+    <button class="btn btn-p" onclick="tryNext(9,10)">Ver Resumen →</button>
   </div>
 </div>
 
 <!-- STEP 8: RESUMEN -->
-<div class="sec" id="step-9">
+<div class="sec" id="step-10">
   <div class="sec-title">📋 Resumen</div>
-  <div class="sec-sub">Guarda tus pronósticos y entrégalos al organizador</div>
+  <div class="sec-sub">Revisa tus pronósticos y envíalos al organizador con el botón "Enviar Polla"</div>
   <div class="finish-card">
     <div style="font-size:2.8rem;margin-bottom:6px">🏆</div>
     <div class="finish-title">¡Polla completada!</div>
@@ -444,7 +498,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);min-
       <button class="btn btn-fin" onclick="openModal('xlsx')">📥 Descargar Excel</button>
       <button class="btn btn-csv" onclick="openModal('csv')">📄 Descargar CSV</button>
     </div>
-    <div class="finish-hint">Al enviar, tus pronósticos llegan automáticamente al organizador</div>
+    <div class="finish-hint">Tus pronósticos se envían directamente al organizador. También puedes descargar una copia.</div>
   </div>
   <div style="text-align:center;margin-bottom:18px">
     <button class="btn btn-review" onclick="document.getElementById('sum-c').scrollIntoView({behavior:'smooth'})">🔍 Revisar mis pronósticos ↓</button>
@@ -621,15 +675,15 @@ function readL(ph,idx){
 // ══════════════════════════════════════
 function validateStep(step){
   const m=[];
-  if(step===0){for(let i=1;i<=3;i++){if(S.col['m'+i+'h']===''||S.col['m'+i+'a']==='')m.push('Partido '+i+' de Colombia: falta el marcador');}}
-  if(step===1){const total=GROUPS.reduce((s,g)=>s+g.matches.length,0);const done=Object.keys(S.grpMatch).length;if(done<total)m.push(`Partidos de grupos: faltan ${total-done} resultados`);}
-  // step 2 ranking is optional — user can continue without reordering
-  if(step===3){const done3=Object.keys(S.best3).length;if(done3<8)m.push(`Mejor Tercero: faltan ${8-done3} selecciones (necesitas elegir 8)`);}
-  if(step===4){const f=R32.filter((_,i)=>!S.r32[i]);if(f.length)m.push(`Ronda de 32: faltan ${f.length} resultados`);}
-  if(step===5){const f=R16.filter((_,i)=>!S.r16[i]);if(f.length)m.push(`Octavos: faltan ${f.length} resultados`);}
-  if(step===6){const f=QF.filter((_,i)=>!S.qf[i]);if(f.length)m.push(`Cuartos: faltan ${f.length} resultados`);}
-  if(step===7){const f=SF.filter((_,i)=>!S.sf[i]);if(f.length)m.push(`Semifinales: faltan ${f.length} resultados`);}
-  if(step===8){if(!S.final)m.push('Falta elegir el Campeón Mundial');if(!S.third)m.push('Falta elegir el Tercer Puesto');}
+  if(step===1){for(let i=1;i<=3;i++){if(S.col['m'+i+'h']===''||S.col['m'+i+'a']==='')m.push('Partido '+i+' de Colombia: falta el marcador');}}
+  if(step===2){const total=GROUPS.reduce((s,g)=>s+g.matches.length,0);const done=Object.keys(S.grpMatch).length;if(done<total)m.push(`Partidos de grupos: faltan ${total-done} resultados`);}
+  // step 3 ranking is optional — user can continue without reordering
+  if(step===4){const done3=Object.keys(S.best3).length;if(done3<8)m.push(`Mejor Tercero: faltan ${8-done3} selecciones (necesitas elegir 8)`);}
+  if(step===5){const f=R32.filter((_,i)=>!S.r32[i]);if(f.length)m.push(`Ronda de 32: faltan ${f.length} resultados`);}
+  if(step===6){const f=R16.filter((_,i)=>!S.r16[i]);if(f.length)m.push(`Octavos: faltan ${f.length} resultados`);}
+  if(step===7){const f=QF.filter((_,i)=>!S.qf[i]);if(f.length)m.push(`Cuartos: faltan ${f.length} resultados`);}
+  if(step===8){const f=SF.filter((_,i)=>!S.sf[i]);if(f.length)m.push(`Semifinales: faltan ${f.length} resultados`);}
+  if(step===9){if(!S.final)m.push('Falta elegir el Campeón Mundial');if(!S.third)m.push('Falta elegir el Tercer Puesto');}
   return m;
 }
 function tryNext(from,to){
@@ -651,12 +705,12 @@ function goStep(n){
   document.querySelectorAll('.step-btn').forEach((b,i)=>{b.classList.remove('active','done');if(i===n)b.classList.add('active');else if(i<n)b.classList.add('done');});
   document.getElementById('val-banner').classList.remove('show');
   if(n===3){renderBest3();}
-  if(n===4){buildBracket('r32',R32,'r32-bracket','r32-list');}
-  if(n===5){buildBracket('r16',R16,'r16-bracket','r16-list');}
-  if(n===6){buildBracket('qf',QF,'qf-bracket','qf-list');}
-  if(n===7){buildBracket('sf',SF,'sf-bracket','sf-list');}
-  if(n===8){buildFinalStep();}
-  if(n===9){renderSummary();}
+  if(n===5){buildBracket('r32',R32,'r32-bracket','r32-list');}
+  if(n===6){buildBracket('r16',R16,'r16-bracket','r16-list');}
+  if(n===7){buildBracket('qf',QF,'qf-bracket','qf-list');}
+  if(n===8){buildBracket('sf',SF,'sf-bracket','sf-list');}
+  if(n===9){buildFinalStep();}
+  if(n===10){renderSummary();}
   window.scrollTo(0,0);
 }
 function onName(){
@@ -1162,7 +1216,7 @@ function buildPredictionsText(){
   const p3rd   = S.third?(S.third==='t1'?sf1l:sf2l):'Sin completar';
   const p4th   = S.third?(S.third==='t1'?sf2l:sf1l):'Sin completar';
 
-  const SEP = '----------';
+  const SEP = '\n----------';
 
   // Header
   v.push(SEP);
@@ -1458,20 +1512,30 @@ function showWelcome(){
   m.id = 'welcome-modal';
   m.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px';
   m.innerHTML = `
-    <div style="background:#0e2415;border:1px solid #1d4728;border-radius:18px;padding:28px 24px;max-width:420px;width:100%;text-align:center">
+    <div style="background:#0f1623;border:1px solid #1c2d45;border-radius:18px;padding:28px 24px;max-width:420px;width:100%;text-align:center">
       <div style="font-size:3rem;margin-bottom:4px">⚽🏆</div>
       <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:3px;color:#f59e0b;margin-bottom:4px">¡Bienvenido!</div>
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:1px;color:rgba(255,255,255,.8);margin-bottom:16px">Polla Mundial 2026 · Por Nelson Bedoya</div>
-      <div style="background:rgba(26,122,60,.15);border:1px solid rgba(74,222,128,.3);border-radius:12px;padding:14px 16px;margin-bottom:18px;text-align:left">
-        <p style="font-size:.82rem;color:rgba(255,255,255,.85);line-height:1.7;margin-bottom:10px">
-          📝 Completa todos los pronósticos paso a paso.<br>
-          Al final se generará un archivo <strong style="color:#f59e0b">Excel o CSV</strong> con todas tus respuestas.
-        </p>
-        <p style="font-size:.88rem;color:#10b981;font-weight:600;line-height:1.6">
-          ⚠️ Importante: una vez termines,<br>
-          <strong>envíale el archivo a Nelson</strong> por correo o WhatsApp.<br>
-          <span style="color:#fca5a5">¡No cierres la app sin haberlo enviado!</span>
-        </p>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:1px;color:rgba(255,255,255,.7);margin-bottom:18px">Polla Mundial 2026</div>
+      <div style="text-align:left;margin-bottom:18px;display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;gap:10px;align-items:flex-start;font-size:.83rem;color:rgba(255,255,255,.85);line-height:1.5">
+          <span style="color:#f59e0b;font-size:1.1rem;flex-shrink:0">1️⃣</span>
+          <span>Completa tu <strong style="color:#f59e0b">nombre, correo y teléfono</strong> al inicio — son obligatorios para enviar.</span>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start;font-size:.83rem;color:rgba(255,255,255,.85);line-height:1.5">
+          <span style="color:#f59e0b;font-size:1.1rem;flex-shrink:0">2️⃣</span>
+          <span>Recorre los <strong style="color:#f59e0b">10 pasos</strong> completando todos los pronósticos. La app te avisará si falta algo antes de avanzar.</span>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start;font-size:.83rem;color:rgba(255,255,255,.85);line-height:1.5">
+          <span style="color:#f59e0b;font-size:1.1rem;flex-shrink:0">3️⃣</span>
+          <span>Al llegar al Resumen, presiona <strong style="color:#f59e0b">📤 Enviar Polla</strong> — tus pronósticos llegarán automáticamente al organizador.</span>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start;font-size:.83rem;color:rgba(255,255,255,.85);line-height:1.5">
+          <span style="color:#f59e0b;font-size:1.1rem;flex-shrink:0">4️⃣</span>
+          <span>Opcional: descarga una copia en <strong style="color:#f59e0b">Excel o CSV</strong> para tus registros.</span>
+        </div>
+        <div style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:8px;padding:10px 12px;font-size:.8rem;color:#fca5a5;line-height:1.5">
+          ⚠️ <strong>No cierres la app</strong> sin haber presionado "Enviar Polla" — de lo contrario tus pronósticos no quedarán registrados.
+        </div>
       </div>
       <button onclick="document.getElementById('welcome-modal').remove()"
         style="background:linear-gradient(135deg,#1b3f8b,#f59e0b);color:#fff;border:none;border-radius:10px;padding:13px 32px;font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;width:100%;letter-spacing:.5px">
