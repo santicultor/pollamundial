@@ -283,7 +283,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);min-
 <!-- STEP 0: COLOMBIA -->
 <div class="sec active" id="step-0">
   <div class="sec-title">🇨🇴 Partidos de Colombia</div>
-  <div class="sec-sub">Predice el marcador exacto de los 3 partidos de Colombia · +50 pts por marcador exacto</div>
+  <div class="sec-sub">Predice el marcador exacto de los 3 partidos de Colombia · +60 pts por marcador exacto</div>
   <div class="col-banner">🏆 <strong>Grupo K:</strong> Colombia · Portugal · Uzbekistán · R.D. Congo</div>
   <div class="col-card" id="cc1">
     <div class="col-meta"><span>Grupo K · Partido 1</span><span>17 Jun · Ciudad de México · 22:00 ET</span></div>
@@ -296,7 +296,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);min-
       </div></div>
       <div class="col-team"><div class="col-emoji">🇺🇿</div><div class="col-tname">Uzbekistán</div></div>
     </div>
-    <div class="col-pts-hint">Marcador exacto: <span>+50 pts</span> · (solo vale el marcador exacto)</div>
+    <div class="col-pts-hint">Marcador exacto: <span>+60 pts</span> · (solo vale el marcador exacto)</div>
   </div>
   <div class="col-card" id="cc2">
     <div class="col-meta"><span>Grupo K · Partido 2</span><span>23 Jun · Guadalajara · 22:00 ET</span></div>
@@ -309,7 +309,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);min-
       </div></div>
       <div class="col-team"><div class="col-emoji">🇨🇩</div><div class="col-tname">R.D. Congo</div></div>
     </div>
-    <div class="col-pts-hint">Marcador exacto: <span>+50 pts</span> · (solo vale el marcador exacto)</div>
+    <div class="col-pts-hint">Marcador exacto: <span>+60 pts</span> · (solo vale el marcador exacto)</div>
   </div>
   <div class="col-card" id="cc3">
     <div class="col-meta"><span>Grupo K · Partido 3</span><span>27 Jun · Miami · 19:30 ET</span></div>
@@ -322,7 +322,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);min-
       </div></div>
       <div class="col-team"><div class="col-emoji">🇵🇹</div><div class="col-tname">Portugal</div></div>
     </div>
-    <div class="col-pts-hint">Marcador exacto: <span>+50 pts</span> · (solo vale el marcador exacto)</div>
+    <div class="col-pts-hint">Marcador exacto: <span>+60 pts</span> · (solo vale el marcador exacto)</div>
   </div>
   <div class="nav-row"><div></div><button class="btn btn-p" onclick="tryNext(0,1)">Continuar → Partidos de Grupos</button></div>
 </div>
@@ -341,7 +341,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);min-
 <!-- STEP 2: ORDEN DE CLASIFICACIÓN -->
 <div class="sec" id="step-2">
   <div class="sec-title">📊 Orden de Clasificación</div>
-  <div class="sec-sub">Solo el 1º (+25pts) y 2º (+20pts) clasificado suman puntos. El orden del 3ro y 4to no puntúa.</div>
+  <div class="sec-sub">Solo el 1º (+20pts) y 2º (+20pts) clasificado suman puntos. El orden del 3ro y 4to no puntúa.</div>
   <div style="background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2);border-radius:var(--r);padding:10px 14px;margin-bottom:14px;font-size:.81rem;color:#93c5fd">
     💡 <strong>Ordena los equipos</strong> usando las flechas ▲▼. <strong style="color:#fca5a5">El orden NO se ajusta automáticamente con los resultados que pusiste antes</strong> — debes ordenarlo manualmente según lo que crees que pasará en cada grupo.
   </div>
@@ -414,9 +414,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);min-
 <!-- STEP 7: FINAL -->
 <div class="sec" id="step-8">
   <div class="sec-title">🏆 Gran Final &amp; 3er Puesto</div>
-  <div class="sec-sub">El último paso — elige al Campeón (+250pts), Subcampeón (+180pts), 3er Puesto (+120pts) y 4to Puesto (+80pts)</div>
+  <div class="sec-sub">El último paso — elige al Campeón (+260pts), Subcampeón (+190pts), 3er Puesto (+130pts) y 4to Puesto (+80pts)</div>
   <div class="final-card">
-    <div class="final-card-title">🏆 Gran Final · 19 Jul · East Rutherford, NJ · Campeón +250 · Subcampeón +180</div>
+    <div class="final-card-title">🏆 Gran Final · 19 Jul · East Rutherford, NJ · Campeón +260 · Subcampeón +190</div>
     <div class="ko-teams" id="final-slots"></div>
   </div>
   <div class="final-card" style="border-color:rgba(180,83,9,.3);background:linear-gradient(135deg,rgba(180,83,9,.08),rgba(180,83,9,.02))">
@@ -546,19 +546,19 @@ const SF=[
 const PHASES={r32:R32,r16:R16,qf:QF,sf:SF};
 
 const PTS={
-  COL_EXACT:50, COL_RES:0,       // Colombia: solo marcador exacto — 3×50 = 150
-  RANK:[25,20,0,0],              // Clasificación: 1º/2º solo — 12×(25+20) = 540
+  COL_EXACT:60, COL_RES:0,       // Colombia: solo marcador exacto — 3×60 = 180
+  RANK:[20,20,0,0],              // Clasificación: 1º/2º solo — 12×(20+20) = 480
   MATCH:15,                      // Resultado partido grupo — 72×15 = 1080
   BEST3:15,                      // Mejores terceros — 8×15 = 120 pts
   r32:40,                        // Ronda de 32 — 16×40 = 640
   r16:50,                        // Octavos — 8×50 = 400
   qf:70,                         // Cuartos — 4×70 = 280
   sf:80,                         // Semifinales — 2×80 = 160
-  final:250,                     // Campeón
-  silver:180,                    // Subcampeón
-  bronze:120,                    // 3er puesto
-  third:80,                      // 4to puesto — total final: 250+180+120+80 = 630
-  // GRAN TOTAL: 150+1080+660+640+400+280+160+630 = 4000 ✓
+  final:260,                     // Campeón
+  silver:190,                    // Subcampeón
+  bronze:130,                    // 3er puesto
+  third:80,                      // 4to puesto — total final: 260+190+130+80 = 660
+  // GRAN TOTAL: 180+1080+480+120+640+400+280+160+660 = 4000 ✓
 };
 
 // ══════════════════════════════════════
@@ -1033,9 +1033,9 @@ function calcPts(){
   ['r32','r16','qf','sf'].forEach(ph=>PHASES[ph].forEach((_,i)=>{if(S[ph][i])p+=PTS[ph];}));
   // Final: elegir ganador implica también subcampeón (el perdedor)
   // Mostramos pts potenciales de AMBOS al predecir la final
-  if(S.final){ p+=PTS.final; p+=PTS.silver; }   // campeón 250 + subcampeón 180
+  if(S.final){ p+=PTS.final; p+=PTS.silver; }   // campeón 260 + subcampeón 190
   // 3er puesto: elegir ganador implica también 4to lugar (el perdedor)
-  if(S.third){ p+=PTS.bronze; p+=PTS.third; }    // 3ro 120 + 4to 80
+  if(S.third){ p+=PTS.bronze; p+=PTS.third; }    // 3ro 130 + 4to 80
   return p;
 }
 function updateProg(){
@@ -1129,9 +1129,9 @@ function renderSummary(){
   h+=`<div class="sum-card"><div class="sum-title">📐 Sistema de Puntos — Total máximo: 4000 pts</div>
     <div style="font-size:.74rem;color:var(--mut);line-height:2">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 16px">
-        <p>⚽ <strong style="color:var(--txt)">Marcador exacto Colombia</strong></p><p style="color:var(--acc);text-align:right">+${PTS.COL_EXACT} pts c/u (×3 = 150)</p>
+        <p>⚽ <strong style="color:var(--txt)">Marcador exacto Colombia</strong></p><p style="color:var(--acc);text-align:right">+${PTS.COL_EXACT} pts c/u (×3 = 180)</p>
         <p>📋 <strong style="color:var(--txt)">Resultado partido grupo</strong></p><p style="color:var(--acc);text-align:right">+${PTS.MATCH} pts c/u (×72 = 1080)</p>
-        <p>📊 <strong style="color:var(--txt)">1º clasificado grupo</strong></p><p style="color:var(--acc);text-align:right">+${PTS.RANK[0]} pts c/u (×12 = 300)</p>
+        <p>📊 <strong style="color:var(--txt)">1º clasificado grupo</strong></p><p style="color:var(--acc);text-align:right">+${PTS.RANK[0]} pts c/u (×12 = 240)</p>
         <p>📊 <strong style="color:var(--txt)">2º clasificado grupo</strong></p><p style="color:var(--acc);text-align:right">+${PTS.RANK[1]} pts c/u (×12 = 240)</p>
         <p>📊 <strong style="color:var(--txt)">3º y 4º clasificado</strong></p><p style="color:var(--acc);text-align:right">Sin puntos</p>
         <p>🥉 <strong style="color:var(--txt)">Mejores terceros</strong></p><p style="color:var(--acc);text-align:right">+${PTS.BEST3} pts c/u (×8 = 120)</p>
