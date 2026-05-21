@@ -687,6 +687,16 @@ function validateStep(step){
   return m;
 }
 function tryNext(from,to){
+  // Before leaving ranking step, ensure all groups are saved with current order
+  if(from===2){
+    GROUPS.forEach(g=>{
+      if(!S.grpRank[g.name]||S.grpRank[g.name].length!==4){
+        S.grpRank[g.name]=[...g.teams];
+      }
+      S.grpSet[g.name]=true;
+    });
+    updateProg();
+  }
   const missing=validateStep(from);
   const banner=document.getElementById('val-banner');
   if(missing.length){
@@ -704,7 +714,15 @@ function goStep(n){
   document.getElementById('step-'+n).classList.add('active');
   document.querySelectorAll('.step-btn').forEach((b,i)=>{b.classList.remove('active','done');if(i===n)b.classList.add('active');else if(i<n)b.classList.add('done');});
   document.getElementById('val-banner').classList.remove('show');
-  if(n===3){renderBest3();}
+  if(n===3){
+    // Ensure all groups have valid rankings before rendering best3 picker
+    GROUPS.forEach(g=>{
+      if(!S.grpRank[g.name]||S.grpRank[g.name].length!==4){
+        S.grpRank[g.name]=[...g.teams];
+      }
+    });
+    renderBest3();
+  }
   if(n===5){buildBracket('r32',R32,'r32-bracket','r32-list');}
   if(n===6){buildBracket('r16',R16,'r16-bracket','r16-list');}
   if(n===7){buildBracket('qf',QF,'qf-bracket','qf-list');}
@@ -748,9 +766,25 @@ function renderGroupMatches(){
   GROUPS.forEach(g=>{
     const card=document.createElement('div');
     card.className='gcard';
-    card.innerHTML=`<div class="gcard-head">GRUPO ${g.name}</div><div class="gm-list" id="gml-${g.name}"></div>`;
+    // Build match HTML inline — synchronous
+    const matchHTML=g.matches.map((m,mi)=>{
+      const key='G'+g.name+mi,res=S.grpMatch[key];
+      const sh=res==='home'?' sel-h':'',sd=res==='draw'?' sel-d':'',sa=res==='away'?' sel-a':'';
+      return `<div class="gm-item">
+        <div class="gm-teams">
+          <div class="gm-team"><span class="gm-emoji">${E(m[0])}</span><span>${m[0]}</span></div>
+          <div class="gm-vs">VS</div>
+          <div class="gm-team right"><span>${m[1]}</span><span class="gm-emoji">${E(m[1])}</span></div>
+        </div>
+        <div class="gm-btns">
+          <button class="gm-btn${sh}" onclick="setGM('${key}','home','${g.name}',this)">${E(m[0],'s')} Gana<span class="gm-pts">+${PTS.MATCH}pts</span></button>
+          <button class="gm-btn${sd}" onclick="setGM('${key}','draw','${g.name}',this)">🤝 Empate<span class="gm-pts">+${PTS.MATCH}pts</span></button>
+          <button class="gm-btn${sa}" onclick="setGM('${key}','away','${g.name}',this)">${E(m[1],'s')} Gana<span class="gm-pts">+${PTS.MATCH}pts</span></button>
+        </div>
+      </div>`;
+    }).join('');
+    card.innerHTML=`<div class="gcard-head">GRUPO ${g.name}</div><div class="gm-list" id="gml-${g.name}">${matchHTML}</div>`;
     c.appendChild(card);
-    setTimeout(()=>fillGM(g),0);
   });
 }
 function fillGM(g){
@@ -792,11 +826,12 @@ function renderGroupRanks(){
   GROUPS.forEach(g=>{
     const card=document.createElement('div');
     card.className='rank-card';
+    // Fully synchronous — no setTimeout
+    const itemsHTML=S.grpRank[g.name].map((t,i)=>rankItemHTML(g.name,t,i)).join('');
     card.innerHTML=`<div class="rank-card-head">GRUPO ${g.name}<span class="g-badge${S.grpSet[g.name]?' on':''}" id="badge-${g.name}">✓ Listo</span></div>
-      <div class="rank-list" id="rl-${g.name}"></div>
+      <div class="rank-list" id="rl-${g.name}">${itemsHTML}</div>
       <div class="rank-hint">Usa las flechas ↑↓ para ordenar del 1º al 4º clasificado</div>`;
     c.appendChild(card);
-    setTimeout(()=>fillRank(g.name),0);
   });
 }
 function fillRank(grpName){
@@ -832,6 +867,8 @@ function moveRank(grpName,idx,dir){
   S.grpSet[grpName]=true;
   fillRank(grpName);
   document.getElementById('badge-'+grpName)?.classList.add('on');
+  // If best3 panel is visible, update it live
+  if(document.getElementById('b3-pool')) updateBest3Pool();
   updateProg();
 }
 
@@ -852,11 +889,43 @@ const BEST3_SLOTS = [
   {slotIdx:7, label:'P87', desc:'vs 1ºK', allowedGroups:['D','E','I','J','L']},
 ];
 
+function getBest3Thirds(){
+  // Always reads live from S.grpRank — returns current 3rd of each group
+  return GROUPS.map(g=>({grp:g.name, team:S.grpRank[g.name][2]||'?'}));
+}
+
+function updateBest3Pool(){
+  // Only refreshes the reference panel + rebuilds select options (keeps selections)
+  const allThirds = getBest3Thirds();
+  // Update reference panel
+  const pool = document.getElementById('b3-pool');
+  if(pool){
+    pool.innerHTML = '<div style="font-size:.75rem;font-weight:600;color:var(--acc);margin-bottom:8px">Tus 12 terceros clasificados (según el orden que definiste)</div>'
+      + allThirds.map(({grp,team})=>`<span style="display:inline-flex;align-items:center;gap:5px;background:var(--bg);border:1px solid var(--bdr);border-radius:6px;padding:4px 10px;margin:3px;font-size:.78rem"><strong style="color:var(--acc)">G${grp}</strong> ${E(team)} ${team}</span>`).join('');
+  }
+  // Rebuild select options preserving current selection
+  BEST3_SLOTS.forEach(({slotIdx,allowedGroups})=>{
+    const sel = document.getElementById('b3-'+slotIdx);
+    if(!sel) return;
+    const chosen = S.best3[slotIdx]||'';
+    const eligible = allThirds.filter(({grp})=>allowedGroups.includes(grp));
+    sel.innerHTML = '<option value="">— Elige —</option>'
+      + eligible.map(({grp,team})=>`<option value="${team}" ${chosen===team?'selected':''} style="color:white;background:#162030">${E(team)} ${team} (3°G${grp})</option>`).join('');
+    // If previously chosen team is no longer eligible, clear it
+    if(chosen && !eligible.find(({team})=>team===chosen)){
+      delete S.best3[slotIdx];
+      sel.style.borderColor='var(--bdr)';
+      sel.style.color='var(--mut)';
+      const card=document.getElementById('b3-card-'+slotIdx);
+      if(card) card.style.borderColor='var(--bdr)';
+    }
+  });
+}
+
 function renderBest3(){
   const c=document.getElementById('best3-container');
   if(!c)return;
-  // All 12 third-place teams
-  const allThirds=GROUPS.map(g=>({grp:g.name,team:S.grpRank[g.name][2]||'?'}));
+  const allThirds = getBest3Thirds();
   c.innerHTML='';
 
   // Info banner
@@ -865,22 +934,20 @@ function renderBest3(){
   info.innerHTML=`🥉 Hay <strong>12 terceros</strong> pero solo <strong>8 avanzan</strong> a la Ronda de 32. Cada llave recibe el 3ro de ciertos grupos. <strong style="color:var(--acc)">+15 pts por cada uno acertado.</strong>`;
   c.appendChild(info);
 
-  // Reference panel — all 12 thirds at a glance
+  // Reference panel — gets id so updateBest3Pool() can target it
   const pool=document.createElement('div');
+  pool.id='b3-pool';
   pool.style.cssText='background:var(--surf);border:1px solid var(--bdr);border-radius:var(--r);padding:12px;margin-bottom:16px';
-  pool.innerHTML='<div style="font-size:.75rem;font-weight:600;color:var(--acc);margin-bottom:8px">Tus 12 terceros clasificados</div>'
-    +allThirds.map(({grp,team})=>`<span style="display:inline-flex;align-items:center;gap:5px;background:var(--bg);border:1px solid var(--bdr);border-radius:6px;padding:4px 10px;margin:3px;font-size:.78rem"><strong style="color:var(--acc)">G${grp}</strong>${E(team)} ${team}</span>`).join('');
+  pool.innerHTML='<div style="font-size:.75rem;font-weight:600;color:var(--acc);margin-bottom:8px">Tus 12 terceros clasificados (según el orden que definiste)</div>'
+    +allThirds.map(({grp,team})=>`<span style="display:inline-flex;align-items:center;gap:5px;background:var(--bg);border:1px solid var(--bdr);border-radius:6px;padding:4px 10px;margin:3px;font-size:.78rem"><strong style="color:var(--acc)">G${grp}</strong> ${E(team)} ${team}</span>`).join('');
   c.appendChild(pool);
 
-  // 8 slot selectors — each filtered to its allowed groups
+  // 8 slot selectors
   const grid=document.createElement('div');
   grid.style.cssText='display:grid;grid-template-columns:repeat(auto-fill,minmax(275px,1fr));gap:10px';
   BEST3_SLOTS.forEach(({slotIdx,label,desc,allowedGroups})=>{
     const chosen=S.best3[slotIdx];
-    // Only show thirds from allowed groups
     const eligible=allThirds.filter(({grp})=>allowedGroups.includes(grp));
-    const borderCol=chosen?'var(--grn)':'var(--bdr)';
-    const txtCol=chosen?'white':'var(--mut)';
     const card=document.createElement('div');
     card.style.cssText=`background:var(--surf);border:1px solid ${chosen?'var(--grn)':'var(--bdr)'};border-radius:var(--r);padding:12px;transition:border-color .2s`;
     card.id='b3-card-'+slotIdx;
@@ -888,15 +955,13 @@ function renderBest3(){
       <div style="font-size:.65rem;color:var(--acc);text-transform:uppercase;letter-spacing:.7px;font-weight:600;margin-bottom:3px">${label} ${desc}</div>
       <div style="font-size:.65rem;color:var(--mut);margin-bottom:9px">Solo 3ros de grupos: ${allowedGroups.join(', ')}</div>
       <select id="b3-${slotIdx}" onchange="pickBest3(${slotIdx},this.value)"
-        style="width:100%;background:var(--bg);border:1px solid ${borderCol};border-radius:8px;padding:9px 12px;color:${txtCol};font-size:.85rem;outline:none;cursor:pointer">
+        style="width:100%;background:var(--bg);border:1px solid ${chosen?'var(--grn)':'var(--bdr)'};border-radius:8px;padding:9px 12px;color:${chosen?'white':'var(--mut)'};font-size:.85rem;outline:none;cursor:pointer">
         <option value="">— Elige —</option>
         ${eligible.map(({grp,team})=>`<option value="${team}" ${chosen===team?'selected':''} style="color:white;background:#162030">${E(team)} ${team} (3°G${grp})</option>`).join('')}
       </select>`;
     grid.appendChild(card);
   });
   c.appendChild(grid);
-  // Apply disabled state on initial render (if revisiting step)
-  setTimeout(refreshBest3Selects, 0);
 }
 
 function pickBest3(slotIdx,team){
